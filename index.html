@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ciara Cosmetics — Wimpern Styling Hennef</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,700;1,400;1,500&family=Manrope:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#160f12;--bg2:#1a1115;--pk:#c9929a;--pk2:#ddb0b7;--pk3:#a06870;--pks:#f0d5d8;--mg:#b07880;--gd:#e8d5c0;--tx:#faf5f0;--txm:#9a8085;--gl:rgba(201,146,154,0.06);--glb:rgba(201,146,154,0.15)}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:'Manrope',sans-serif;background:var(--bg);color:var(--tx);overflow-x:hidden}
+#sparkleCanvas{position:fixed;inset:0;z-index:9997;pointer-events:none}
+.glitter-box{position:fixed;inset:0;pointer-events:none;z-index:9996;overflow:hidden}
+.gli{position:absolute;width:3px;height:3px;border-radius:50%;animation:gf linear infinite;opacity:0}
+@keyframes gf{0%{opacity:0;transform:translateY(100vh) rotate(0) scale(0)}10%{opacity:1;transform:scale(1)}50%{opacity:.6}90%{opacity:1}100%{opacity:0;transform:translateY(-10vh) rotate(720deg) scale(0)}}
+.cur-glow{position:fixed;width:400px;height:400px;border-radius:50%;background:radial-gradient(circle,rgba(201,146,154,.1) 0%,rgba(176,120,128,.04) 40%,transparent 70%);pointer-events:none;z-index:9995;transform:translate(-50%,-50%);transition:left .08s,top .08s}
+
+nav{position:fixed;top:0;width:100%;z-index:1000;padding:1.2rem 3rem;display:flex;justify-content:space-between;align-items:center;backdrop-filter:blur(25px) saturate(1.4);background:rgba(22,15,18,.75);border-bottom:1px solid var(--glb);transition:all .4s}
+.logo{font-family:'Playfair Display',serif;font-size:1.7rem;font-weight:500;letter-spacing:.2em;background:linear-gradient(135deg,var(--pk),var(--pks),var(--gd),var(--pk));background-size:300% 300%;-webkit-background-clip:text;-webkit-text-fill-color:transparent;animation:shm 4s ease-in-out infinite;text-transform:uppercase}
+@keyframes shm{0%,100%{background-position:0% 50%}50%{background-position:100% 50%}}
+.nav-links{display:flex;gap:2.2rem;list-style:none;align-items:center}
+.nav-links a{color:var(--txm);text-decoration:none;font-size:.75rem;letter-spacing:.18em;text-transform:uppercase;font-weight:500;transition:all .3s;position:relative}
+.nav-links a::after{content:'';position:absolute;bottom:-4px;left:50%;width:0;height:2px;background:linear-gradient(90deg,var(--pk),var(--mg));transition:all .3s;transform:translateX(-50%);border-radius:2px}
+.nav-links a:hover{color:var(--pk2)}
+.nav-links a:hover::after{width:100%}
+.nav-cta{background:linear-gradient(135deg,var(--pk3),var(--mg))!important;color:#fff!important;padding:.65rem 1.6rem!important;border-radius:50px;font-size:.72rem!important;letter-spacing:.12em!important;cursor:pointer;transition:all .4s;box-shadow:0 4px 20px rgba(160,104,112,.25);border:none}
+.nav-cta::after{display:none!important}
+.nav-cta:hover{transform:translateY(-2px);box-shadow:0 8px 35px rgba(160,104,112,.4)}
+
+.hero{min-height:100vh;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden}
+.hero-bg{position:absolute;inset:0;background:radial-gradient(ellipse 70% 55% at 60% 35%,rgba(201,146,154,.1) 0%,transparent 60%),radial-gradient(ellipse 50% 40% at 25% 65%,rgba(176,120,128,.07) 0%,transparent 50%),radial-gradient(ellipse 40% 30% at 80% 75%,rgba(232,213,192,.05) 0%,transparent 40%)}
+.hero-orbs{position:absolute;inset:0;overflow:hidden}
+.hero-orb{position:absolute;border-radius:50%;filter:blur(80px);animation:of 8s ease-in-out infinite}
+.hero-orb:nth-child(1){width:500px;height:500px;background:rgba(201,146,154,.07);top:10%;right:-10%}
+.hero-orb:nth-child(2){width:350px;height:350px;background:rgba(176,120,128,.05);bottom:10%;left:-5%;animation-delay:-3s}
+.hero-orb:nth-child(3){width:250px;height:250px;background:rgba(232,213,192,.04);top:50%;left:40%;animation-delay:-5s}
+@keyframes of{0%,100%{transform:translate(0,0) scale(1)}33%{transform:translate(30px,-30px) scale(1.05)}66%{transform:translate(-20px,20px) scale(.95)}}
+
+.hero-content{text-align:center;z-index:1;max-width:850px;padding:2rem}
+.hero-badge{display:inline-flex;align-items:center;gap:.7rem;padding:.55rem 1.6rem;border:1px solid rgba(201,146,154,.2);border-radius:50px;font-size:.7rem;letter-spacing:.25em;text-transform:uppercase;color:var(--pk2);margin-bottom:2.5rem;backdrop-filter:blur(10px);background:rgba(201,146,154,.07);opacity:0;animation:fu 1s .3s forwards;box-shadow:0 0 30px rgba(201,146,154,.08),inset 0 0 20px rgba(201,146,154,.04)}
+.hero-badge .dot{width:7px;height:7px;border-radius:50%;background:var(--pk3);box-shadow:0 0 10px var(--pk3),0 0 20px rgba(160,104,112,.3);animation:pls 1.5s infinite}
+.hero h1{font-family:'Playfair Display',serif;font-size:clamp(3.2rem,8.5vw,7.5rem);font-weight:400;line-height:1.05;margin-bottom:1.5rem;opacity:0;animation:fu 1s .5s forwards}
+.hero h1 em{font-style:italic;background:linear-gradient(135deg,var(--pk),var(--pks),var(--gd));background-size:200% 200%;-webkit-background-clip:text;-webkit-text-fill-color:transparent;animation:shm 3s ease-in-out infinite}
+.spt{position:relative;display:inline-block}
+.spt::before,.spt::after{content:'✦';position:absolute;font-size:.3em;color:var(--pks);animation:tw 2s ease-in-out infinite;-webkit-text-fill-color:var(--pks)}
+.spt::before{top:-10px;right:-15px;animation-delay:.5s}
+.spt::after{bottom:5px;left:-15px;animation-delay:1.2s}
+@keyframes tw{0%,100%{opacity:.3;transform:scale(.8) rotate(0)}50%{opacity:1;transform:scale(1.2) rotate(180deg)}}
+.hero p{font-size:1.1rem;color:var(--txm);font-weight:300;line-height:1.8;max-width:520px;margin:0 auto 3rem;opacity:0;animation:fu 1s .7s forwards}
+.hero-buttons{display:flex;gap:1.2rem;justify-content:center;flex-wrap:wrap;opacity:0;animation:fu 1s .9s forwards}
+
+.btn-primary{background:linear-gradient(135deg,var(--pk3),var(--mg),var(--pk));background-size:200% 200%;animation:shm 3s ease-in-out infinite;color:#fff;padding:1.1rem 2.8rem;border:none;border-radius:50px;font-family:'Manrope',sans-serif;font-size:.82rem;font-weight:600;letter-spacing:.15em;text-transform:uppercase;cursor:pointer;transition:all .4s;text-decoration:none;display:inline-block;box-shadow:0 6px 30px rgba(160,104,112,.28);position:relative;overflow:hidden}
+.btn-primary::before{content:'';position:absolute;top:-50%;left:-50%;width:200%;height:200%;background:linear-gradient(45deg,transparent,rgba(255,255,255,.12),transparent);transform:rotate(45deg);transition:all .6s}
+.btn-primary:hover::before{left:100%}
+.btn-primary:hover{transform:translateY(-3px) scale(1.02);box-shadow:0 12px 45px rgba(160,104,112,.4)}
+.btn-ghost{background:rgba(201,146,154,.07);color:var(--pk2);padding:1.1rem 2.8rem;border:1px solid rgba(201,146,154,.2);border-radius:50px;font-family:'Manrope',sans-serif;font-size:.82rem;font-weight:500;letter-spacing:.15em;text-transform:uppercase;cursor:pointer;transition:all .4s;text-decoration:none;backdrop-filter:blur(10px)}
+.btn-ghost:hover{border-color:var(--pk);background:rgba(201,146,154,.14);transform:translateY(-3px);box-shadow:0 8px 30px rgba(201,146,154,.12)}
+
+.scroll-ind{position:absolute;bottom:2.5rem;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:.8rem;opacity:0;animation:fu 1s 1.3s forwards}
+.scroll-ind span{font-size:.6rem;letter-spacing:.4em;text-transform:uppercase;color:var(--txm)}
+.scroll-line{width:1px;height:50px;background:linear-gradient(to bottom,var(--pk),transparent);animation:sp 2s infinite}
+
+section{padding:7rem 3rem;position:relative}
+.slbl{font-size:.7rem;letter-spacing:.4em;text-transform:uppercase;color:var(--pk);margin-bottom:1.5rem;display:flex;align-items:center;gap:1rem;text-shadow:0 0 20px rgba(201,146,154,.3)}
+.slbl::before{content:'✦';font-size:.6rem;animation:tw 3s infinite}
+.stl{font-family:'Playfair Display',serif;font-size:clamp(2.2rem,5vw,3.8rem);font-weight:400;line-height:1.2;margin-bottom:1.5rem}
+.stl em{font-style:italic;background:linear-gradient(135deg,var(--pk),var(--pks));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+
+#services{background:var(--bg2);position:relative}
+#services::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--pk),var(--mg),var(--pk),transparent);opacity:.3}
+.srv-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:1.5rem;margin-top:3.5rem;max-width:1200px;margin-left:auto;margin-right:auto}
+.srv{background:linear-gradient(145deg,rgba(201,146,154,.04),rgba(176,120,128,.02));border:1px solid rgba(201,146,154,.1);border-radius:24px;padding:2.5rem;transition:all .5s cubic-bezier(.23,1,.32,1);position:relative;overflow:hidden;opacity:0;transform:translateY(40px)}
+.srv.visible{opacity:1;transform:translateY(0)}
+.srv::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--pk3),var(--mg),var(--pks));opacity:0;transition:opacity .4s}
+.srv::after{content:'';position:absolute;inset:0;background:radial-gradient(circle at 50% 0%,rgba(201,146,154,.07) 0%,transparent 60%);opacity:0;transition:opacity .4s}
+.srv:hover::before{opacity:1}
+.srv:hover::after{opacity:1}
+.srv:hover{transform:translateY(-8px);border-color:rgba(201,146,154,.22);box-shadow:0 25px 60px rgba(160,104,112,.1),0 0 40px rgba(201,146,154,.04)}
+.srv-icon{width:56px;height:56px;border-radius:16px;background:linear-gradient(135deg,rgba(201,146,154,.14),rgba(176,120,128,.07));display:flex;align-items:center;justify-content:center;font-size:1.5rem;margin-bottom:1.5rem;position:relative;z-index:1;box-shadow:0 4px 15px rgba(201,146,154,.08)}
+.srv h3{font-family:'Playfair Display',serif;font-size:1.5rem;font-weight:500;margin-bottom:.8rem;position:relative;z-index:1}
+.srv p{font-size:.88rem;color:var(--txm);line-height:1.7;font-weight:300;margin-bottom:1.5rem;position:relative;z-index:1}
+.srv-price{font-family:'Playfair Display',serif;font-size:1.4rem;color:var(--pk);font-weight:500;position:relative;z-index:1;text-shadow:0 0 20px rgba(201,146,154,.25)}
+.srv-price small{font-family:'Manrope',sans-serif;font-size:.7rem;color:var(--txm);margin-left:.3rem;text-shadow:none}
+
+#gallery{max-width:1200px;margin:0 auto}
+.ibar{display:flex;align-items:center;gap:1rem;margin-top:2rem;margin-bottom:1.5rem;padding:1rem 1.5rem;background:rgba(201,146,154,.05);border:1px solid rgba(201,146,154,.1);border-radius:16px;backdrop-filter:blur(10px)}
+.iav{width:48px;height:48px;border-radius:50%;background:linear-gradient(135deg,var(--pk3),var(--mg),var(--gd));padding:2px}
+.iav-in{width:100%;height:100%;border-radius:50%;background:var(--bg);display:flex;align-items:center;justify-content:center;font-size:1.1rem}
+.iinfo h4{font-size:.9rem;font-weight:600}
+.iinfo span{font-size:.75rem;color:var(--txm)}
+.ifol{margin-left:auto;background:linear-gradient(135deg,var(--pk3),var(--mg));color:#fff;border:none;padding:.5rem 1.4rem;border-radius:10px;font-size:.75rem;font-weight:600;cursor:pointer;font-family:'Manrope',sans-serif;transition:all .3s;box-shadow:0 3px 15px rgba(160,104,112,.25)}
+.ifol:hover{transform:scale(1.05);box-shadow:0 5px 25px rgba(160,104,112,.4)}
+.gg{display:grid;grid-template-columns:repeat(3,1fr);gap:4px;border-radius:20px;overflow:hidden}
+.gi{aspect-ratio:1;position:relative;overflow:hidden;cursor:pointer;opacity:0;transform:scale(.9)}
+.gi.visible{opacity:1;transform:scale(1);transition:all .6s cubic-bezier(.23,1,.32,1)}
+.gi .ph{width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-size:2.5rem;transition:transform .6s cubic-bezier(.23,1,.32,1)}
+.gi:hover .ph{transform:scale(1.1)}
+.go{position:absolute;inset:0;background:linear-gradient(135deg,rgba(160,104,112,.5),rgba(176,120,128,.4));backdrop-filter:blur(3px);display:flex;align-items:center;justify-content:center;gap:2rem;opacity:0;transition:opacity .4s}
+.gi:hover .go{opacity:1}
+.gs{display:flex;align-items:center;gap:.4rem;color:#fff;font-size:.9rem;font-weight:600}
+
+.mq{padding:1.5rem 0;overflow:hidden;border-top:1px solid rgba(201,146,154,.1);border-bottom:1px solid rgba(201,146,154,.1);background:rgba(201,146,154,.03)}
+.mqt{display:flex;animation:mqa 25s linear infinite;white-space:nowrap;gap:3rem}
+.mqt span{font-family:'Playfair Display',serif;font-size:1.3rem;font-style:italic;color:var(--txm);opacity:.5;flex-shrink:0}
+.mqt .sep{color:var(--pk);font-style:normal;opacity:.6}
+@keyframes mqa{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+
+.abg{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center;max-width:1100px;margin:3rem auto 0}
+.abi{aspect-ratio:3/4;border-radius:28px;background:linear-gradient(145deg,rgba(201,146,154,.07),rgba(176,120,128,.03));border:1px solid rgba(201,146,154,.1);display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden}
+.abi::before{content:'🌸';font-size:5rem;opacity:.2;animation:fl 4s ease-in-out infinite}
+.abi .rng{position:absolute;border-radius:50%;border:1px solid rgba(201,146,154,.12);animation:rp 4s ease-in-out infinite}
+.abi .rng:nth-child(2){width:120px;height:120px}
+.abi .rng:nth-child(3){width:200px;height:200px;animation-delay:.5s}
+.abi .rng:nth-child(4){width:280px;height:280px;animation-delay:1s}
+@keyframes rp{0%,100%{transform:scale(1);opacity:.3}50%{transform:scale(1.1);opacity:.6}}
+.fb{position:absolute;bottom:1.5rem;left:1.5rem;background:rgba(22,15,18,.85);backdrop-filter:blur(20px);border:1px solid rgba(201,146,154,.18);padding:1rem 1.5rem;border-radius:16px;display:flex;align-items:center;gap:.8rem;box-shadow:0 8px 30px rgba(0,0,0,.3)}
+.fb .num{font-family:'Playfair Display',serif;font-size:2rem;color:var(--pk);font-weight:700;line-height:1}
+.fb .lbl{font-size:.65rem;letter-spacing:.15em;text-transform:uppercase;color:var(--txm);line-height:1.4}
+.abt p{font-size:.95rem;color:var(--txm);line-height:1.9;font-weight:300;margin-bottom:1.5rem}
+.str{display:flex;gap:2.5rem;margin-top:2.5rem;padding-top:2rem;border-top:1px solid rgba(201,146,154,.1)}
+.stn{font-family:'Playfair Display',serif;font-size:2.4rem;color:var(--pk);font-weight:500;line-height:1}
+.stla{font-size:.7rem;color:var(--txm);letter-spacing:.1em;text-transform:uppercase;margin-top:.4rem}
+
+#reviews{background:var(--bg2);position:relative}
+#reviews::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--pk),var(--mg),var(--pk),transparent);opacity:.25}
+.rvc{display:flex;gap:1.5rem;margin-top:3rem;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;padding-bottom:1rem;max-width:1200px;margin-left:auto;margin-right:auto}
+.rvc::-webkit-scrollbar{display:none}
+.rv{min-width:360px;scroll-snap-align:start;background:linear-gradient(145deg,rgba(201,146,154,.05),rgba(176,120,128,.02));border:1px solid rgba(201,146,154,.1);border-radius:24px;padding:2.5rem;flex-shrink:0;opacity:0;transform:translateX(40px);transition:all .4s}
+.rv.visible{opacity:1;transform:translateX(0);transition:all .6s cubic-bezier(.23,1,.32,1)}
+.rv:hover{border-color:rgba(201,146,154,.22);box-shadow:0 15px 40px rgba(160,104,112,.07)}
+.qm{font-family:'Playfair Display',serif;font-size:4rem;color:var(--pk);opacity:.2;line-height:1;margin-bottom:-1rem}
+.rvs{color:var(--pk);font-size:.9rem;letter-spacing:3px;margin-bottom:1.2rem}
+.rv blockquote{font-family:'Playfair Display',serif;font-size:1.15rem;font-style:italic;line-height:1.7;color:var(--tx);margin-bottom:1.5rem;font-weight:400}
+.rva{display:flex;align-items:center;gap:.8rem}
+.rvav{width:42px;height:42px;border-radius:50%;background:linear-gradient(135deg,var(--pk3),var(--mg));display:flex;align-items:center;justify-content:center;font-size:.8rem;font-weight:700;color:#fff;box-shadow:0 3px 12px rgba(160,104,112,.25)}
+.rvn{font-size:.85rem;font-weight:600}
+.rvv{font-size:.7rem;color:var(--txm)}
+
+.cta{text-align:center;padding:8rem 3rem;position:relative;overflow:hidden}
+.cta::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 45% 40% at 50% 50%,rgba(201,146,154,.08) 0%,transparent 70%)}
+.gr{position:absolute;border-radius:50%;border:1px solid rgba(201,146,154,.07);top:50%;left:50%;transform:translate(-50%,-50%);animation:rp 5s ease-in-out infinite}
+.gr:nth-child(1){width:400px;height:400px}
+.gr:nth-child(2){width:550px;height:550px;animation-delay:1s}
+.gr:nth-child(3){width:700px;height:700px;animation-delay:2s}
+
+#contact{background:var(--bg2)}
+.cg{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1.5rem;max-width:900px;margin:3rem auto 0}
+.cc{background:linear-gradient(145deg,rgba(201,146,154,.04),rgba(176,120,128,.02));border:1px solid rgba(201,146,154,.1);border-radius:20px;padding:2.2rem;text-align:center;transition:all .4s}
+.cc:hover{border-color:rgba(201,146,154,.22);transform:translateY(-5px);box-shadow:0 15px 40px rgba(160,104,112,.07)}
+.ci{font-size:1.6rem;margin-bottom:1rem}
+.cc h4{font-family:'Playfair Display',serif;font-size:1.15rem;margin-bottom:.5rem;font-weight:500}
+.cc p{font-size:.82rem;color:var(--txm);font-weight:300;line-height:1.7}
+
+footer{padding:3rem;border-top:1px solid rgba(201,146,154,.1);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1.5rem}
+.fbr{font-family:'Playfair Display',serif;font-size:1.2rem;font-weight:400;letter-spacing:.2em;background:linear-gradient(135deg,var(--pk),var(--pks));-webkit-background-clip:text;-webkit-text-fill-color:transparent;text-transform:uppercase}
+.fsc{display:flex;gap:1rem}
+.fsc a{width:44px;height:44px;border-radius:50%;border:1px solid rgba(201,146,154,.15);display:flex;align-items:center;justify-content:center;color:var(--txm);text-decoration:none;font-size:1.1rem;transition:all .3s}
+.fsc a:hover{border-color:var(--pk);color:var(--pk);transform:translateY(-3px);box-shadow:0 5px 20px rgba(201,146,154,.15)}
+.fcp{font-size:.72rem;color:var(--txm);letter-spacing:.1em}
+.flv{color:var(--pk3);animation:pls 1.5s infinite;display:inline-block}
+.footer-legal{display:flex;gap:1.5rem;flex-wrap:wrap}
+.footer-legal a{color:var(--txm);text-decoration:none;font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;transition:color .3s}
+.footer-legal a:hover{color:var(--pk)}
+
+.ham{display:none;flex-direction:column;gap:5px;cursor:pointer;background:none;border:none;padding:5px}
+.ham span{width:24px;height:1.5px;background:var(--pk2);transition:all .3s;border-radius:2px}
+
+/* Legal Modal */
+.lmodal{display:none;position:fixed;inset:0;z-index:10000;background:rgba(10,5,8,.88);backdrop-filter:blur(14px);overflow-y:auto;padding:2rem}
+.lmodal-box{max-width:780px;margin:3rem auto;background:var(--bg2);border:1px solid rgba(201,146,154,.15);padding:3.5rem;position:relative;border-radius:8px}
+.lmodal-close{position:absolute;top:1.5rem;right:1.5rem;background:none;border:none;color:var(--txm);font-size:1.5rem;cursor:pointer;line-height:1;transition:color .3s}
+.lmodal-close:hover{color:var(--pk)}
+.ltabs{display:flex;gap:0;margin-bottom:3rem;border-bottom:1px solid rgba(201,146,154,.1)}
+.ltab{padding:.8rem 2rem;background:none;border:none;border-bottom:2px solid transparent;color:var(--txm);font-family:'Manrope',sans-serif;font-size:.7rem;letter-spacing:.2em;text-transform:uppercase;cursor:pointer;font-weight:500;margin-bottom:-1px;transition:all .3s}
+.ltab.active{border-bottom-color:var(--pk);color:var(--pk)}
+.lcontent{display:none}
+.lcontent.active{display:block}
+.lcontent h2{font-family:'Playfair Display',serif;font-size:2rem;font-weight:400;margin-bottom:2rem;color:var(--pk)}
+.lcontent h3{font-family:'Playfair Display',serif;font-size:1.1rem;font-weight:500;color:var(--pk2);margin:1.8rem 0 .6rem}
+.lcontent p{font-size:.85rem;color:var(--txm);line-height:1.9;font-weight:300;margin-bottom:.5rem}
+.lcontent a{color:var(--pk);text-decoration:none}
+.lcontent a:hover{text-decoration:underline}
+.lcontent strong{color:var(--tx);font-weight:500}
+
+@keyframes fu{from{opacity:0;transform:translateY(35px)}to{opacity:1;transform:translateY(0)}}
+@keyframes pls{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.5;transform:scale(1.4)}}
+@keyframes sp{0%{opacity:0;transform:scaleY(0);transform-origin:top}50%{opacity:1;transform:scaleY(1)}100%{opacity:0;transform:scaleY(1);transform-origin:bottom}}
+@keyframes fl{0%,100%{transform:translateY(0)}50%{transform:translateY(-15px)}}
+
+@media(max-width:768px){
+nav{padding:1rem 1.5rem}
+.nav-links{display:none}
+.ham{display:flex}
+.nav-links.active{display:flex;flex-direction:column;position:absolute;top:100%;left:0;right:0;background:rgba(22,15,18,.95);backdrop-filter:blur(25px);padding:2rem;border-bottom:1px solid rgba(201,146,154,.12);gap:1.5rem}
+section{padding:4rem 1.5rem}
+.abg{grid-template-columns:1fr;gap:2rem}
+.rv{min-width:290px}
+.str{gap:1.5rem;flex-wrap:wrap}
+footer{flex-direction:column;text-align:center}
+.cur-glow{display:none}
+.lmodal-box{padding:2rem 1.5rem}
+.ltab{padding:.7rem 1rem;font-size:.6rem}
+}
+</style>
+</head>
+<body>
+
+<div class="glitter-box" id="gBox"></div>
+<canvas id="sparkleCanvas"></canvas>
+<div class="cur-glow" id="curGlow"></div>
+
+<nav>
+  <div class="logo">Ciara Cosmetics</div>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="#services">Leistungen</a></li>
+    <li><a href="#gallery">Galerie</a></li>
+    <li><a href="#about">Über mich</a></li>
+    <li><a href="#reviews">Bewertungen</a></li>
+    <li><a href="#contact" class="nav-cta">✨ Termin buchen</a></li>
+  </ul>
+  <button class="ham" id="hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
+</nav>
+
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-orbs"><div class="hero-orb"></div><div class="hero-orb"></div><div class="hero-orb"></div></div>
+  <div class="hero-content">
+    <div class="hero-badge"><span class="dot"></span> Jetzt Termine verfügbar</div>
+    <h1>Dein Blick.<br><span class="spt"><em>Unvergesslich.</em></span></h1>
+    <p>Premium Wimpern-Styling in Hennef — für einen Look, der Bände spricht. Natürlich. Glamourös. Einzigartig du.</p>
+    <div class="hero-buttons">
+      <a href="#contact" class="btn-primary">✨ Termin buchen</a>
+      <a href="#services" class="btn-ghost">Leistungen ansehen</a>
+    </div>
+  </div>
+  <div class="scroll-ind"><span>Scroll</span><div class="scroll-line"></div></div>
+</section>
+
+<div class="mq">
+  <div class="mqt">
+    <span>Classic Lashes</span><span class="sep">✦</span><span>Volume Lashes</span><span class="sep">✦</span><span>Mega Volume</span><span class="sep">✦</span><span>Wimpernlifting</span><span class="sep">✦</span><span>Laminierung</span><span class="sep">✦</span><span>Hennef</span><span class="sep">✦</span><span>Ciara Cosmetics</span><span class="sep">✦</span>
+    <span>Classic Lashes</span><span class="sep">✦</span><span>Volume Lashes</span><span class="sep">✦</span><span>Mega Volume</span><span class="sep">✦</span><span>Wimpernlifting</span><span class="sep">✦</span><span>Laminierung</span><span class="sep">✦</span><span>Hennef</span><span class="sep">✦</span><span>Ciara Cosmetics</span><span class="sep">✦</span>
+  </div>
+</div>
+
+<section id="services">
+  <div style="max-width:1200px;margin:0 auto">
+    <div class="slbl">Leistungen</div>
+    <div class="stl">Perfekte Wimpern <em>für jeden Anlass</em></div>
+    <div class="srv-grid">
+      <!-- Neusets -->
+      <div class="srv" data-animate><div class="srv-icon">🌸</div><h3>1:1 Classic</h3><p>Natürliche Eleganz — eine Extension pro Naturwimper für einen dezenten, wunderschönen Alltagslook.</p><div class="srv-price">59€ <small>/ Neuset</small></div></div>
+      <div class="srv" data-animate><div class="srv-icon">✨</div><h3>Soft Volume</h3><p>Weicher, voluminöser Look — leichte Fächer für mehr Fülle ohne zu viel Dramatik.</p><div class="srv-price">69€ <small>/ Neuset</small></div></div>
+      <div class="srv" data-animate><div class="srv-icon">💫</div><h3>Volume</h3><p>Dramatisch & voluminös — handgefertigte Fächer für maximale Fülle und einen unwiderstehlichen Augenaufschlag.</p><div class="srv-price">79€ <small>/ Neuset</small></div></div>
+      <div class="srv" data-animate><div class="srv-icon">💎</div><h3>Mega Volume</h3><p>Der absolute Glamour-Look — ultrafeine Extensions für maximale Fülle und einen wow-Effekt.</p><div class="srv-price">89€ <small>/ Neuset</small></div></div>
+      <div class="srv" data-animate><div class="srv-icon">👁️</div><h3>Beratung</h3><p>Persönliche Stilberatung — gemeinsam finden wir den perfekten Look für deine Augenform.</p><div class="srv-price">Kostenlos</div></div>
+    </div>
+
+    <!-- Preistabelle Auffüllen -->
+    <div style="margin-top:4rem;max-width:900px;margin-left:auto;margin-right:auto">
+      <div class="slbl" style="justify-content:center;margin-bottom:1rem">Auffüllen</div>
+      <div class="stl" style="text-align:center;font-size:clamp(1.5rem,3vw,2.2rem);margin-bottom:2rem">Preise für <em>Auffüllungen</em></div>
+      <div style="overflow-x:auto">
+        <table style="width:100%;border-collapse:collapse;font-size:.85rem">
+          <thead>
+            <tr>
+              <th style="padding:1rem 1.5rem;text-align:left;border-bottom:1px solid rgba(201,146,154,.2);color:var(--pk);font-size:.7rem;letter-spacing:.2em;text-transform:uppercase;font-weight:500;font-family:'Manrope',sans-serif">Stil</th>
+              <th style="padding:1rem 1.5rem;text-align:center;border-bottom:1px solid rgba(201,146,154,.2);color:var(--pk);font-size:.7rem;letter-spacing:.2em;text-transform:uppercase;font-weight:500;font-family:'Manrope',sans-serif">1 Woche</th>
+              <th style="padding:1rem 1.5rem;text-align:center;border-bottom:1px solid rgba(201,146,154,.2);color:var(--pk);font-size:.7rem;letter-spacing:.2em;text-transform:uppercase;font-weight:500;font-family:'Manrope',sans-serif">2 Wochen</th>
+              <th style="padding:1rem 1.5rem;text-align:center;border-bottom:1px solid rgba(201,146,154,.2);color:var(--pk);font-size:.7rem;letter-spacing:.2em;text-transform:uppercase;font-weight:500;font-family:'Manrope',sans-serif">3 Wochen</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr style="border-bottom:1px solid rgba(201,146,154,.08);transition:background .3s" onmouseover="this.style.background='rgba(201,146,154,.05)'" onmouseout="this.style.background='transparent'">
+              <td style="padding:1rem 1.5rem;font-family:'Playfair Display',serif;font-size:1rem;font-weight:400">1:1 Classic</td>
+              <td style="padding:1rem 1.5rem;text-align:center;color:var(--pk);font-family:'Playfair Display',serif;font-size:1rem">19€</td>
+              <td style="padding:1rem 1.5rem;text-align:center;color:var(--pk);font-family:'Playfair Display',serif;font-size:1rem">29€</td>
+              <td style="padding:1rem 1.5rem;text-align:center;color:var(--pk);font-family:'Playfair Display',serif;font-size:1rem">39€</td>
+            </tr>
+            <tr style="border-bottom:1px solid rgba(201,146,154,.08);transition:background .3s" onmouseover="this.style.background='rgba(201,146,154,.05)'" onmouseout="this.style.background='transparent'">
+              <td style="padding:1rem 1.5rem;font-family:'Playfair Display',serif;font-size:1rem;font-weight:400">Soft Volume</td>
+              <td style="padding:1rem 1.5rem;text-align:center;color:var(--pk);font-family:'Playfair Display',serif;font-size:1rem">29€</td>
+              <td style="padding:1rem 1.5rem;text-align:center;color:var(--pk);font-family:'Playfair Display',serif;font-size:1rem">39€</td>
+              <td style="padding:1rem 1.5rem;text-align:center;color:var(--pk);font-family:'Playfair Display',serif;font-size:1rem">49€</td>
+            </tr>
+            <tr style="border-bottom:1px solid rgba(201,146,154,.08);transition:background .3s" onmouseover="this.style.background='rgba(201,146,154,.05)'" onmouseout="this.style.background='transparent'">
+              <td style="padding:1rem 1.5rem;font-family:'Playfair Display',serif;font-size:1rem;font-weight:400">Volume</td>
+              <td style="padding:1rem 1.5rem;text-align:center;color:var(--pk);font-family:'Playfair Display',serif;font-size:1rem">39€</td>
+              <td style="padding:1rem 1.5rem;text-align:center;color:var(--pk);font-family:'Playfair Display',serif;font-size:1rem">49€</td>
+              <td style="padding:1rem 1.5rem;text-align:center;color:var(--pk);font-family:'Playfair Display',serif;font-size:1rem">59€</td>
+            </tr>
+            <tr style="transition:background .3s" onmouseover="this.style.background='rgba(201,146,154,.05)'" onmouseout="this.style.background='transparent'">
+              <td style="padding:1rem 1.5rem;font-family:'Playfair Display',serif;font-size:1rem;font-weight:400">Mega Volume</td>
+              <td style="padding:1rem 1.5rem;text-align:center;color:var(--pk);font-family:'Playfair Display',serif;font-size:1rem">49€</td>
+              <td style="padding:1rem 1.5rem;text-align:center;color:var(--pk);font-family:'Playfair Display',serif;font-size:1rem">59€</td>
+              <td style="padding:1rem 1.5rem;text-align:center;color:var(--pk);font-family:'Playfair Display',serif;font-size:1rem">69€</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="gallery">
+  <div class="slbl">Galerie</div>
+  <div class="stl">Meine <em>Arbeiten</em></div>
+  <div class="ibar">
+    <div class="iav"><div class="iav-in">✨</div></div>
+    <div class="iinfo"><h4>@ciara.cosmeticss</h4><span>2.4k Follower · 156 Beiträge</span></div>
+    <button class="ifol" onclick="window.open('https://instagram.com/ciara.cosmeticss','_blank')">Folgen</button>
+  </div>
+  <div class="gg">
+    <div class="gi" data-animate><div class="ph" style="background:linear-gradient(135deg,#2a1820,#1a1015)">👁️</div><div class="go"><div class="gs">♥ 247</div><div class="gs">💬 18</div></div></div>
+    <div class="gi" data-animate><div class="ph" style="background:linear-gradient(135deg,#251520,#180e15)">🌸</div><div class="go"><div class="gs">♥ 312</div><div class="gs">💬 24</div></div></div>
+    <div class="gi" data-animate><div class="ph" style="background:linear-gradient(135deg,#201220,#150d18)">✨</div><div class="go"><div class="gs">♥ 189</div><div class="gs">💬 12</div></div></div>
+    <div class="gi" data-animate><div class="ph" style="background:linear-gradient(135deg,#2a1820,#1a1015)">💎</div><div class="go"><div class="gs">♥ 421</div><div class="gs">💬 31</div></div></div>
+    <div class="gi" data-animate><div class="ph" style="background:linear-gradient(135deg,#281020,#1a0a14)">🌟</div><div class="go"><div class="gs">♥ 276</div><div class="gs">💬 19</div></div></div>
+    <div class="gi" data-animate><div class="ph" style="background:linear-gradient(135deg,#221520,#16101a)">🦋</div><div class="go"><div class="gs">♥ 358</div><div class="gs">💬 27</div></div></div>
+    <div class="gi" data-animate><div class="ph" style="background:linear-gradient(135deg,#2a1222,#1a0d16)">💕</div><div class="go"><div class="gs">♥ 503</div><div class="gs">💬 42</div></div></div>
+    <div class="gi" data-animate><div class="ph" style="background:linear-gradient(135deg,#1f1520,#140f1c)">🌺</div><div class="go"><div class="gs">♥ 198</div><div class="gs">💬 15</div></div></div>
+    <div class="gi" data-animate><div class="ph" style="background:linear-gradient(135deg,#281520,#1c0e16)">💫</div><div class="go"><div class="gs">♥ 445</div><div class="gs">💬 36</div></div></div>
+  </div>
+</section>
+
+<section id="about">
+  <div style="max-width:1200px;margin:0 auto">
+    <div class="slbl">Über mich</div>
+    <div class="stl">Leidenschaft für <em>Perfektion</em></div>
+    <div class="abg">
+      <div class="abi">
+        <div class="rng"></div><div class="rng"></div><div class="rng"></div>
+        <div class="fb"><div class="num">5+</div><div class="lbl">Jahre<br>Erfahrung</div></div>
+      </div>
+      <div class="abt">
+        <p>Hi, ich bin Ciara — zertifizierte Lash Stylistin aus Hennef. Meine Leidenschaft sind Wimpern, die nicht nur schön aussehen, sondern sich auch gut anfühlen.</p>
+        <p>In meinem gemütlichen Studio lege ich größten Wert auf Hygiene, Qualität und eine entspannte Atmosphäre. Jede Kundin bekommt einen individuell angepassten Look — ob natürlich oder dramatisch glamourös.</p>
+        <p>Ich arbeite ausschließlich mit premium Materialien und bilde mich regelmäßig weiter, um dir immer die neuesten Techniken bieten zu können.</p>
+        <div class="str">
+          <div><div class="stn">2.000+</div><div class="stla">Behandlungen</div></div>
+          <div><div class="stn">500+</div><div class="stla">Kundinnen</div></div>
+          <div><div class="stn">4,9</div><div class="stla">Google ★</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="reviews">
+  <div style="max-width:1200px;margin:0 auto">
+    <div class="slbl">Bewertungen</div>
+    <div class="stl">Was meine <em>Kundinnen</em> sagen</div>
+  </div>
+  <div class="rvc">
+    <div class="rv" data-animate><div class="qm">"</div><div class="rvs">★★★★★</div><blockquote>„Ciara hat genau den Look getroffen, den ich mir gewünscht habe. So natürlich und trotzdem wow — ich bin absolut begeistert!"</blockquote><div class="rva"><div class="rvav">LM</div><div><div class="rvn">Lisa M.</div><div class="rvv">via Google</div></div></div></div>
+    <div class="rv" data-animate><div class="qm">"</div><div class="rvs">★★★★★</div><blockquote>„Endlich eine Stylistin, die wirklich zuhört! Das Studio ist wunderschön und die Atmosphäre einfach zum Wohlfühlen."</blockquote><div class="rva"><div class="rvav">JK</div><div><div class="rvn">Julia K.</div><div class="rvv">via Instagram</div></div></div></div>
+    <div class="rv" data-animate><div class="qm">"</div><div class="rvs">★★★★★</div><blockquote>„Mega Volume Lashes — ich bin verliebt! Halten super lange und sehen einfach umwerfend aus. Komme definitiv wieder!"</blockquote><div class="rva"><div class="rvav">SK</div><div><div class="rvn">Sophie K.</div><div class="rvv">via Google</div></div></div></div>
+    <div class="rv" data-animate><div class="qm">"</div><div class="rvs">★★★★★</div><blockquote>„Bin seit über einem Jahr Stammkundin. Ciaras Arbeit ist immer top — professionell, sauber und einfach wunderschön!"</blockquote><div class="rva"><div class="rvav">AT</div><div><div class="rvn">Anna T.</div><div class="rvv">via Google</div></div></div></div>
+  </div>
+</section>
+
+<section class="cta" id="booking">
+  <div class="gr"></div><div class="gr"></div><div class="gr"></div>
+  <div class="slbl" style="justify-content:center">Bereit?</div>
+  <div class="stl" style="max-width:600px;margin:0 auto 1.5rem;position:relative;z-index:1">Dein Traumblick wartet <em>auf dich</em></div>
+  <p style="color:var(--txm);font-size:.95rem;font-weight:300;margin-bottom:2.5rem;position:relative;z-index:1">Sichere dir jetzt deinen Termin und erlebe den Unterschied.</p>
+  <a href="#contact" class="btn-primary" style="font-size:.88rem;position:relative;z-index:1">✨ Jetzt Termin sichern ✨</a>
+</section>
+
+<section id="contact">
+  <div style="max-width:1200px;margin:0 auto;text-align:center">
+    <div class="slbl" style="justify-content:center">Kontakt</div>
+    <div class="stl">So erreichst du <em>mich</em></div>
+    <div class="cg">
+      <div class="cc"><div class="ci">📍</div><h4>Studio</h4><p>Gartenstraße 7<br>53773 Hennef (Sieg)</p></div>
+      <div class="cc"><div class="ci">📱</div><h4>Kontakt</h4><p>heller37@icloud.com<br>@ciara.cosmeticss</p></div>
+      <div class="cc"><div class="ci">🕐</div><h4>Öffnungszeiten</h4><p>Mo – Fr: 9:00 – 18:00<br>Sa, So & Feiertage: nach Vereinbarung</p></div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="fbr">Ciara Cosmetics</div>
+  <div class="fsc">
+    <a href="https://instagram.com/ciara.cosmeticss" target="_blank" title="Instagram">📸</a>
+    <a href="mailto:heller37@icloud.com" title="E-Mail">✉️</a>
+  </div>
+  <div class="footer-legal">
+    <a href="#" onclick="openLegal('impressum');return false;">Impressum</a>
+    <a href="#" onclick="openLegal('datenschutz');return false;">Datenschutz</a>
+    <a href="#" onclick="openLegal('agb');return false;">AGB</a>
+  </div>
+  <div class="fcp">© 2026 Ciara Cosmetics · Hennef — Made with <span class="flv">♥</span></div>
+</footer>
+
+<!-- Legal Modal -->
+<div class="lmodal" id="legalModal">
+  <div class="lmodal-box">
+    <button class="lmodal-close" onclick="closeLegal()">✕</button>
+    <div class="ltabs">
+      <button class="ltab active" id="tab-impressum" onclick="switchTab('impressum')">Impressum</button>
+      <button class="ltab" id="tab-datenschutz" onclick="switchTab('datenschutz')">Datenschutz</button>
+      <button class="ltab" id="tab-agb" onclick="switchTab('agb')">AGB</button>
+    </div>
+    <div class="lcontent active" id="content-impressum">
+      <h2>Impressum</h2>
+      <h3>Angaben gemäß § 5 TMG</h3><p>Ciara Heller<br>Gartenstraße 7<br>53773 Hennef (Sieg)</p>
+      <h3>Kontakt</h3><p>E-Mail: <a href="mailto:heller37@icloud.com">heller37@icloud.com</a></p>
+      <h3>Kleinunternehmerregelung</h3><p>Als Kleinunternehmerin im Sinne von § 19 UStG wird keine Umsatzsteuer berechnet und ausgewiesen.</p>
+      <h3>Verantwortlich für den Inhalt</h3><p>Ciara Heller (Adresse wie oben)</p>
+      <h3>Streitschlichtung</h3><p>Die EU-Kommission stellt eine Plattform zur Online-Streitbeilegung bereit: <a href="https://ec.europa.eu/consumers/odr" target="_blank">ec.europa.eu/consumers/odr</a>. Wir sind nicht verpflichtet, an einem Streitbeilegungsverfahren teilzunehmen.</p>
+    </div>
+    <div class="lcontent" id="content-datenschutz">
+      <h2>Datenschutzerklärung</h2>
+      <h3>1. Verantwortliche Stelle</h3><p>Ciara Heller, Gartenstraße 7, 53773 Hennef — heller37@icloud.com</p>
+      <h3>2. Erhebung von Daten</h3><p>Wir erheben personenbezogene Daten nur soweit nötig zur Terminbuchung und Kommunikation (Name, E-Mail, ggf. Telefon).</p>
+      <h3>3. Zweck der Verarbeitung</h3><p>Ihre Daten werden ausschließlich zur Abwicklung von Terminbuchungen und zur Beantwortung von Anfragen genutzt. Eine Weitergabe an Dritte erfolgt nicht.</p>
+      <h3>4. Rechtsgrundlage</h3><p>Verarbeitung auf Grundlage von Art. 6 Abs. 1 lit. b DSGVO (Vertragserfüllung) sowie Art. 6 Abs. 1 lit. f DSGVO.</p>
+      <h3>5. Speicherdauer</h3><p>Daten werden gelöscht, sobald sie nicht mehr erforderlich sind, spätestens nach 3 Jahren.</p>
+      <h3>6. Ihre Rechte</h3><p>Sie haben Recht auf Auskunft, Berichtigung, Löschung und Einschränkung. Kontakt: heller37@icloud.com</p>
+      <h3>7. Instagram</h3><p>Diese Website verlinkt auf @ciara.cosmeticss. Beim Besuch von Instagram gelten die Datenschutzbestimmungen von Meta. Wir haben keinen Einfluss auf diese Datenverarbeitung.</p>
+      <h3>8. Beschwerderecht</h3><p>Zuständige Aufsichtsbehörde: Landesbeauftragte für Datenschutz und Informationsfreiheit NRW.</p>
+    </div>
+    <div class="lcontent" id="content-agb">
+      <h2>Allgemeine Geschäftsbedingungen</h2>
+      <h3>1. Geltungsbereich</h3><p>Diese AGB gelten für alle Dienstleistungen von Ciara Heller (Ciara Cosmetics), Gartenstraße 7, 53773 Hennef.</p>
+      <h3>2. Terminbuchung</h3><p>Termine können per Instagram-DM oder E-Mail gebucht werden. Ein Termin ist verbindlich nach schriftlicher Bestätigung.</p>
+      <h3>3. Stornierung & Absagen</h3><p>Stornierungen müssen mindestens <strong>48 Stunden</strong> vorher erfolgen. Bei späteren Absagen oder Nichterscheinen wird eine Ausfallgebühr von 50 % berechnet.</p>
+      <h3>4. Preise und Zahlung</h3><p>Alle Preise sind Endpreise (Kleinunternehmerregelung § 19 UStG). Zahlung vor Ort per Überweisung oder EC-Karte. Eine Barzahlung ist leider nicht möglich.</p>
+      <h3>5. Gesundheit & Kontraindikationen</h3><p>Kundinnen sind verpflichtet, auf bekannte Allergien oder Unverträglichkeiten hinzuweisen. Bei Nichtangabe übernimmt Ciara Cosmetics keine Haftung.</p>
+      <h3>6. Reklamationen</h3><p>Beanstandungen sind innerhalb von <strong>48 Stunden</strong> nach Behandlung schriftlich mitzuteilen.</p>
+      <h3>7. Haftung</h3><p>Haftung ist auf Vorsatz und grobe Fahrlässigkeit beschränkt.</p>
+      <h3>8. Anwendbares Recht</h3><p>Es gilt das Recht der Bundesrepublik Deutschland. Gerichtsstand ist Hennef.</p>
+    </div>
+  </div>
+</div>
+
+<script>
+// Glitter
+const gBox=document.getElementById('gBox');
+const cols=['#c9929a','#ddb0b7','#f0d5d8','#faf5f0','#a06870','#e8c0c5','#e8d5c0','#fff'];
+function mkG(){const p=document.createElement('div');p.className='gli';p.style.cssText=`left:${Math.random()*100}%;width:${Math.random()*4+1}px;height:${Math.random()*4+1}px;`;const c=cols[Math.floor(Math.random()*cols.length)];p.style.background=c;p.style.boxShadow=`0 0 ${Math.random()*8+3}px ${c}`;p.style.animationDuration=(Math.random()*6+5)+'s';p.style.animationDelay=Math.random()*5+'s';gBox.appendChild(p);setTimeout(()=>p.remove(),12000)}
+setInterval(mkG,200);for(let i=0;i<25;i++)setTimeout(mkG,i*80);
+
+// Sparkle canvas
+const cv=document.getElementById('sparkleCanvas');const cx=cv.getContext('2d');
+cv.width=innerWidth;cv.height=innerHeight;
+addEventListener('resize',()=>{cv.width=innerWidth;cv.height=innerHeight});
+let sp=[];
+document.addEventListener('mousemove',e=>{for(let i=0;i<2;i++)sp.push({x:e.clientX+(Math.random()-.5)*30,y:e.clientY+(Math.random()-.5)*30,sz:Math.random()*3+1,op:1,sx:(Math.random()-.5)*2,sy:(Math.random()-.5)*2-1,c:cols[Math.floor(Math.random()*cols.length)],r:Math.random()*360,rs:(Math.random()-.5)*10})});
+function dS(s){cx.save();cx.translate(s.x,s.y);cx.rotate(s.r*Math.PI/180);cx.globalAlpha=s.op;cx.fillStyle=s.c;cx.shadowBlur=8;cx.shadowColor=s.c;cx.beginPath();for(let i=0;i<4;i++){const a=i*Math.PI/2,ox=Math.cos(a)*s.sz*2,oy=Math.sin(a)*s.sz*2,ia=a+Math.PI/4,ix=Math.cos(ia)*s.sz*.5,iy=Math.sin(ia)*s.sz*.5;i===0?cx.moveTo(ox,oy):cx.lineTo(ox,oy);cx.lineTo(ix,iy)}cx.closePath();cx.fill();cx.restore()}
+function aS(){cx.clearRect(0,0,cv.width,cv.height);sp=sp.filter(s=>s.op>.01);sp.forEach(s=>{s.x+=s.sx;s.y+=s.sy;s.op*=.96;s.sz*=.98;s.r+=s.rs;dS(s)});requestAnimationFrame(aS)}
+aS();
+
+// Cursor glow
+const glow=document.getElementById('curGlow');
+document.addEventListener('mousemove',e=>{glow.style.left=e.clientX+'px';glow.style.top=e.clientY+'px'});
+
+// Nav scroll
+addEventListener('scroll',()=>{document.querySelector('nav').style.padding=scrollY>50?'.8rem 3rem':'1.2rem 3rem'});
+
+// Hamburger
+document.getElementById('hamburger').addEventListener('click',()=>document.getElementById('navLinks').classList.toggle('active'));
+document.querySelectorAll('.nav-links a').forEach(l=>l.addEventListener('click',()=>document.getElementById('navLinks').classList.remove('active')));
+
+// Animate on scroll
+const obs=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting){const idx=Array.from(e.target.parentElement.children).indexOf(e.target);setTimeout(()=>e.target.classList.add('visible'),idx*120);obs.unobserve(e.target)}})},{threshold:.12});
+document.querySelectorAll('[data-animate]').forEach(el=>obs.observe(el));
+
+// Legal modal
+function openLegal(tab){document.getElementById('legalModal').style.display='block';document.body.style.overflow='hidden';switchTab(tab)}
+function closeLegal(){document.getElementById('legalModal').style.display='none';document.body.style.overflow=''}
+function switchTab(tab){document.querySelectorAll('.lcontent').forEach(c=>c.classList.remove('active'));document.querySelectorAll('.ltab').forEach(t=>t.classList.remove('active'));document.getElementById('content-'+tab).classList.add('active');document.getElementById('tab-'+tab).classList.add('active')}
+document.getElementById('legalModal').addEventListener('click',e=>{if(e.target===document.getElementById('legalModal'))closeLegal()});
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeLegal()});
+</script>
+</body>
+</html>
